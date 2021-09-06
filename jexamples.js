@@ -62,7 +62,7 @@ $(document).ready(function() {
 
 
 
-    //get data
+    //get data using get method
     function getRollNo(bid) {
         $.getJSON("RollNo.php?id=" + bid, function(data) {
             $("#roll_no").val('');
@@ -72,7 +72,20 @@ $(document).ready(function() {
         });
     }
 
-
+    //get data using post method
+    function getRollNumber(bid) {
+        $("#roll_no").val('');
+         $.ajax({
+            url: 'RollNo.php',
+            type: 'post',
+            data: {id:bid},
+            success: function(response) {
+                var val = JSON.parse(response);
+                $("#roll_no").val(val.roll);
+            }
+        });
+    }
+    
     //on change
     $(document).on('change', '#User', function() {
         var uid = $(this).find(":selected").val();
